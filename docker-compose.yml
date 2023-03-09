@@ -1,0 +1,37 @@
+version: "3"
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:$GITLAB_VERSION
+    hostname: $GITLAB_HOST
+    ports:
+      - 22:22
+      - 80:80
+      - 443:443
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    restart: unless-stopped
+    networks:
+      - netlab
+
+  runner:
+    image: gitlab/gitlab-runner:alpine
+    restart: always
+    depends_on:
+      - gitlab 
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - gitlab_runner:/etc/gitlab-runner
+    networks:
+      - netlab
+
+networks:
+  netlab:
+    name: gitlab-network
+
+volumes:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  gitlab_runner:

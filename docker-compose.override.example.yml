@@ -1,0 +1,13 @@
+version: "3"
+services:
+#  gitlab:
+#    image: gitlab/gitlab-ce:$GITLAB_VERSION
+    hostname: gitlab.local
+    ports:
+      - 822:22
+      - 8080:80
+      - 8443:443
+#    volumes:
+#      - gitlab_config:/custom/path/gitlab/conf
+#      - gitlab_logs:/custom/path/gitlab/log
+#      - gitlab_data:/custom/path/gitlab/data
