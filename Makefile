@@ -16,7 +16,7 @@ getpass :
 
 ## runner-setup	:	Get the default password of Gitlab root account.
 runner-setup :
-	@docker exec -it $(RUNNER_CONTAINER) gitlab-runner register --url "http://$(GITLAB_HOST)" --clone-url "http://$(GITLAB_HOST)"
+	@docker exec -it $(RUNNER_CONTAINER) gitlab-runner register --url "http://gitlab" --clone-url "http://gitlab)"
 
 ## runner-network	:	Setup gitlab-runner to use docker internal network.
 runner-network :
