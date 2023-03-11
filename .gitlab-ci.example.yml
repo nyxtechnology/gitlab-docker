@@ -1,0 +1,24 @@
+image: php:8.2.3-apache
+
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - echo "Compiling the code..."
+    - echo "Run your build process here."
+    - echo "Compile complete."
+  artifacts:
+    paths:
+    - target
+
+test-job:
+  stage: test
+  dependencies:
+    - build-job
+  script:
+    - ls -al
+    - echo "Running tests"
+    - echo "Run your test commands here."
