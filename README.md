@@ -31,7 +31,7 @@ Note: The first launch of the service may take several minutes.
 7- Run `sudo echo '127.0.0.1       gitlab.local' >> /etc/hosts`
 (update local domain to reflect you setup in case you have changed `GITLAB_HOST` variable in `.env` file)
 
-8- Run `make exec "grep -r 'Password:' /etc/gitlab/"` and copy the password for root account
+8- Run `make getpass` and copy the password for root account
 (command output is similar to: `/etc/gitlab/initial_root_password:Password: BFDCwgfG3MUJ1Ilvy6170iW+1ffoQr7RK4msOzKxgMw=`)
 
 9- Access http://gitlab.local on your browser
@@ -39,7 +39,7 @@ Note: The first launch of the service may take several minutes.
 10- Log in using 'root' as username and the password from step 8
 
 
-## COnfigure Gitlab Runner
+## Configure Gitlab Runner
 
 
 1- Run `make runner-setup` initiate gitlab-runner register module
