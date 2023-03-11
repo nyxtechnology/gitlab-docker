@@ -4,8 +4,6 @@ include .env
 
 default: up
 
-DRUPAL_ROOT ?= /var/www/html/web
-
 ## help	:	Print commands help.
 help : docker.mk
 	@sed -n 's/^##//p' $<
@@ -31,8 +29,8 @@ stop:
 
 ## prune	:	Remove containers and their volumes.
 ##		You can optionally pass an argument with the service name to prune single container
-##		prune mariadb	: Prune `mariadb` container and remove its volumes.
-##		prune mariadb solr	: Prune `mariadb` and `solr` containers and remove their volumes.
+##		prune gitlab	: Prune `gitlab` container and remove its volumes.
+##		prune gitlab runner	: Prune `gitlab` and `runner` containers and remove their volumes.
 prune:
 	@echo "Removing containers for Gitlab..."
 	@docker-compose down -v $(filter-out $@,$(MAKECMDGOALS))
@@ -41,7 +39,7 @@ prune:
 ps:
 	@docker-compose ps
 
-## shell	:	Access `php` container via shell.
+## shell	:	Access `gitlab` container via shell.
 shell:
 	docker exec -ti -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_gitlab' --format "{{ .ID }}") bash
 
@@ -52,8 +50,8 @@ exec:
 
 ## logs	:	View containers logs.
 ##		You can optinally pass an argument with the service name to limit logs
-##		logs php	: View `php` container logs.
-##		logs nginx php	: View `nginx` and `php` containers logs.
+##		logs gitlab	: View `gitlab` container logs.
+##		logs runner gitlab	: View `runner` and `gitlab` containers logs.
 logs:
 	@docker-compose logs -f $(filter-out $@,$(MAKECMDGOALS))
 
