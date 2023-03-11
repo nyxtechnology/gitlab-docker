@@ -41,12 +41,12 @@ ps:
 
 ## shell	:	Access `gitlab` container via shell.
 shell:
-	docker exec -ti -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_gitlab' --format "{{ .ID }}") bash
+	@docker exec -ti -e COLUMNS=$(shell tput cols) -e LINES=$(shell tput lines) $(shell docker ps --filter name='$(PROJECT_NAME)_gitlab' --format "{{ .ID }}") bash
 
 ## exec	:	Executes any command in gitlab container WORKDIR (default is `/`).
 ## 		Doesn't support --flag arguments unless command is wrapped by quotes.
 exec:
-	docker-compose exec gitlab $(filter-out $@,$(MAKECMDGOALS))
+	@docker-compose exec gitlab $(filter-out $@,$(MAKECMDGOALS))
 
 ## logs	:	View containers logs.
 ##		You can optinally pass an argument with the service name to limit logs
